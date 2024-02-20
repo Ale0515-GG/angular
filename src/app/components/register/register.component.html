@@ -1,0 +1,108 @@
+<form [formGroup]="regisForm" (ngSubmit)="submitRegis()">
+  <p-card header="Ingresar" [style]="{ width: '360px' }">
+    <!-- Nombre -->
+    <div class="field">
+      <label for="text">Nombre</label>
+      <input
+        type="text"
+        pInputText
+        class="w-full"
+        placeholder="Ingresar un Nombre"
+        formControlName="name"
+      />
+
+      <small
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="name.hasError('required')">El nombre es obligatorio</div>
+      </small>
+    </div>
+
+    <!-- Correo -->
+    <div class="field">
+      <label for="email">Correo Electronico</label>
+      <input
+        type="text"
+        pInputText
+        class="w-full"
+        placeholder="Ingresar Email"
+        formControlName="email"
+      />
+
+      <small
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="email.hasError('required')">Requiere un correo</div>
+        <div *ngIf="email.hasError('email')">Correo incorrecto</div>
+      </small>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="field">
+      <label for="password">Contraseña</label>
+      <input
+        pInputText
+        type="password"
+        formControlName="password"
+        placeholder="Ingresar Contraseña"
+        class="w-full"
+      />
+
+      <small
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="password.hasError('required')">Requiere una contraseña</div>
+      </small>
+    </div>
+
+    <!-- Confirmar contraseñá -->
+    <div class="field">
+      <label for="repPassword">Repetir Contraseña</label>
+      <input
+        pInputText
+        type="password"
+        formControlName="repPassword"
+        placeholder="Repetir Contraseña"
+        class="w-full"
+      />
+
+      <small
+        *ngIf="
+          repPassword.invalid && (repPassword.dirty || repPassword.touched)
+        "
+        class="block p-error"
+      >
+        <div *ngIf="repPassword.hasError('required')">Contraseña no igual</div>
+      </small>
+
+      <small class="block p-error">
+        <div
+          *ngIf="
+            regisForm.hasError('passwordMismatch') &&
+            repPassword.valid &&
+            password.valid
+          "
+        >
+          Contraseña no igual
+        </div>
+      </small>
+    </div>
+
+    <!-- Boton -->
+    <div class="field">
+      <p-button
+        label="Registrar"
+        [disabled]="regisForm.invalid"
+        type="submit"
+      ></p-button>
+    </div>
+
+    <!-- Tienes cuenta-->
+    <div class="mt-2">
+      ¿Ya tienes cuenta? <a routerLink="/login">Ingresa</a>
+    </div>
+  </p-card>
+</form>

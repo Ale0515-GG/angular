@@ -1,0 +1,56 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <p-card header="Ingresar" [style]="{ width: '360px' }">
+    <!-- Correo -->
+    <div class="field">
+      <label for="email">Correo Electronico</label>
+      <input
+        type="text"
+        pInputText
+        class="w-full"
+        placeholder="Ingresar Email"
+        formControlName="email"
+      />
+
+      <small
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="email.hasError('required')">Requiere un correo</div>
+        <div *ngIf="email.hasError('email')">Correo incorrecto</div>
+      </small>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="field">
+      <label for="password">Contraseña</label>
+      <input
+        pInputText
+        type="password"
+        formControlName="password"
+        placeholder="Ingresar Contraseña"
+        class="w-full"
+      />
+
+      <small
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+        class="block p-error"
+      >
+        <div *ngIf="password.hasError('required')">Requiere una contraseña</div>
+      </small>
+    </div>
+
+    <!-- Boton -->
+    <div class="field">
+      <p-button
+        label="Ingresar"
+        [disabled]="loginForm.invalid"
+        type="submit"
+      ></p-button>
+    </div>
+
+    <!-- No tienes cuenta-->
+    <div class="mt-2">
+      ¿No tienes cuenta? <a routerLink="/register">Registrate</a>
+    </div>
+  </p-card>
+</form>
